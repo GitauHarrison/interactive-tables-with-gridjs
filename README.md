@@ -28,8 +28,7 @@ Add Grid.js to your specific table:
 <div id="table"></div>
 
 <script>
-  const table = new Grid({
-    el: '#table',
+  new gridjs.Grid({
     data: [
       { name: 'John', age: '25', city: 'New York' },
       { name: 'Jane', age: '24', city: 'London' },
@@ -40,7 +39,7 @@ Add Grid.js to your specific table:
       { name: 'age', label: 'Age' },
       { name: 'city', label: 'City' },
     ],
-  });
+  }).render(document.getElementById('table'));
 </script>
 ```
 
