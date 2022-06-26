@@ -4,16 +4,24 @@ from app.models import User
 from create_fake_users import create_fake_users
 
 
-@app.route('/basic-table')
-def basic_table():
-    """Basic table with few features."""
-    users = User.query
-    if users.count() >= 10000:
-        users = users.limit(1000)
-        print("All users are shown.", users.count())
+def fake_users():
+    """Create fake users and limit them to 10000."""
+    db_users = User.query
+    if db_users.count() >= 10000:
+        all_users = db_users.limit(10000)
     else:
         create_fake_users(500)
-        print("All users are created: ", users.count())
+    print(db_users.count())
+    return all_users
+
+
+@app.route('/basic-table')
+def basic_table():
+    """
+    Basic table with few features.
+    All data loaded and displayed at once
+    """
+    users = fake_users()
     return render_template(
         'basic_table.html',
         users=users,
@@ -22,12 +30,11 @@ def basic_table():
 
 @app.route('/ajax-table')
 def ajax_table():
-    users = User.query
-    if users.count() >= 10000:
-        users = users.limit(10000)
-    else:
-        create_fake_users(500)
-        print("All users are created: ", users.count())
+    """
+    Render empty table.
+    Data will be loaded via AJAX afterwards.
+    """
+    users = fake_users()
     return render_template(
         'ajax_table.html',
         users=users,
@@ -36,17 +43,19 @@ def ajax_table():
 
 @app.route('/ajax-table-data')
 def ajax_data():
+    """
+    Return a dictionary of users' data
+    """
     return {'data': [user.to_dict() for user in User.query.all()]}
 
 
 @app.route('/server-side-table')
 def server_side_table():
-    users = User.query
-    if users.count() >= 10000:
-        users = users.limit(10000)
-    else:
-        create_fake_users(500)
-        print("All users are created: ", users.count())
+    """
+    Users data displayed on request.
+    If page 1 is requested, data for ony that page will be loaded.
+    """
+    users = fake_users()
     return render_template(
         'server_side_table.html',
         users=users,
@@ -55,6 +64,10 @@ def server_side_table():
 
 @app.route('/server-side-table-data')
 def server_side_table_data():
+    """
+    Add search, sort and pagination functionalities
+    in the server
+    """
     query = User.query
 
     # Search filter
