@@ -1,5 +1,6 @@
+from crypt import methods
 from app import app, db
-from flask import render_template, request
+from flask import render_template, request, abort
 from app.models import User
 from create_fake_users import create_fake_users
 
@@ -11,7 +12,6 @@ def fake_users():
         all_users = db_users.limit(10000)
     else:
         create_fake_users(500)
-    print(db_users.count())
     return all_users
 
 
@@ -103,6 +103,37 @@ def server_side_table_data():
 
     # Response
     return {
-        'data': [user.to_dict() for user in query.all()],
+        'data': [user.to_dict() for user in query],
         'total': total
     }
+
+
+@app.route('/editable-table')
+def editable_table():
+    """
+    App user should be able to edit select fields.
+    The edited data will be saved in the database.
+    """
+    users = fake_users()
+    return render_template(
+        'editable_table.html',
+        users=users,
+        title='Editable Table')
+
+
+@app.route('/editable-table-update', methods=['POST'])
+def editable_table_update():
+    """
+    Update user data in the database.
+    """
+    data = request.get_json()
+    print(data)
+    if 'id' not in data:
+        abort(400)
+    user = User.query.get(data['id'])
+    fields = ['name', 'age', 'address', 'phone', 'email']
+    for field in fields:
+        if field in data:
+            setattr(user, field, data[field])
+    db.session.commit()
+    return '', 204
