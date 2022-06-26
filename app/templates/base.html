@@ -27,10 +27,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href=" # ">Gridjs</a>
+            <a class="navbar-brand" href=" {{ url_for('index') }} ">Gridjs</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">            
             <ul class="nav navbar-nav navbar-right">
+                <li><a href=" {{ url_for('bootstrap_table') }} ">Bootstrap table</a></li>
                 <li><a href=" {{ url_for('basic_table') }} ">Basic table</a></li>
                 <li><a href=" {{ url_for('ajax_table') }} ">Ajax table</a></li>
                 <li><a href=" {{ url_for('server_side_table') }} ">Server-side table</a></li>

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block app_context %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{ title }}</h1>
+            <p>
+                There are 5 types of table i'd like to show you:
+            </p>
+            <ul>
+                <li>
+                    <a href="{{ url_for('bootstrap_table') }}">Bootstrap Table</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('basic_table') }}">Basic Table</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('ajax_table') }}">Ajax Table</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('server_side_table') }}">Server-side Table</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('editable_table') }}">Editable server-side Table</a>
+                </li>
+            </ul>
+            <p>
+                The main difference between these tables is the level of 
+                interactivity they with little to collosal amounts of data.
+            </p>
+        </div>
+    </div>
+{% endblock %}

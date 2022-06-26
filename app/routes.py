@@ -1,4 +1,3 @@
-from crypt import methods
 from app import app, db
 from flask import render_template, request, abort
 from app.models import User
@@ -13,6 +12,23 @@ def fake_users():
     else:
         create_fake_users(500)
     return all_users
+
+
+@app.route('/')
+@app.route('/index')
+def index():
+    """Render the index page."""
+    return render_template('index.html', title='Home')
+
+
+@app.route('/bootstrap-table')
+def bootstrap_table():
+    """Render bootstrap table."""
+    all_users = fake_users()
+    return render_template(
+        'bootstrap_table.html',
+        users=all_users,
+        title='Bootstrap Table')
 
 
 @app.route('/basic-table')
