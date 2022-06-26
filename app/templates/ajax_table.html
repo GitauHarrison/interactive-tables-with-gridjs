@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block app_context %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Basic Table</h1>
+        <div id="table"></div>
+    </div>  
+</div>
+{% endblock %}
+
+{% block gridjs %}
+<script>
+    new gridjs.Grid({
+        columns: [
+            { id: 'name', name: 'Name'},
+            { id: 'age', name: 'Age'},
+            { id: 'address', name: 'Address'},
+            { id: 'phone', name: 'Phone Number'},
+            { id: 'email', name: 'Email'}
+        ],
+        server: {
+            url: '{{ url_for('ajax_data') }}',
+            then: results => results.data,
+        },
+        search: true,
+        sort: true,
+        pagination: true,
+    }).render(document.getElementById('table'));
+</script>
+{% endblock %}
