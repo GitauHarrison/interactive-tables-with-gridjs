@@ -127,7 +127,6 @@ def editable_table_update():
     Update user data in the database.
     """
     data = request.get_json()
-    print(data)
     if 'id' not in data:
         abort(400)
     user = User.query.get(data['id'])
