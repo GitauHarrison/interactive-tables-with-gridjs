@@ -61,7 +61,7 @@ This table is a slight improvement to the basic table. The table schema is displ
 
 ## Server-side Table
 
-To solve the slight lag issue experienced in all the previous three tables, the server-side example shifts the loading of data to the server's side. Data will be displayed based on request. For example, if data on page 5 is needed, only page 5 data will be displayed. The loading of data dependant on the request.
+To solve the slight lag issue experienced in all the previous three tables, the server-side example shifts the loading of data to the server's side. Data will be displayed based on request. For example, if data on page 5 is needed, only page 5 data will be loaded and susbsequently displayed. The loading of data is dependant on the request.
 
 ## Editable Table
 
