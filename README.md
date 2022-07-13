@@ -6,12 +6,13 @@ This is an update to an earlier post on [interactive tables using DataTables.js]
 
 ## Overview
 
-Datatable.js relies heavily on JQuery. Most front-end frameworks currently are able to bypass the use of JQuery, making it obsolete, though it still has its use cases. With that said, there is a need to update the creation of interactive of tables.
+Datatable.js relies heavily on JQuery. Most front-end frameworks currently are able to bypass the use of JQuery, making it obsolete, though it still has its use cases. With that said, there is a need to update the original project which relied on JQuery to create tables.
 
 ## Tools Used
 - Flask microframework
 - Python for programming
 - Grid.js for interactive tables
+- SQLite for database
 
 ## Implementation
 
